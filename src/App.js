@@ -1,11 +1,31 @@
-import './App.css';
+import { useEffect, useState } from 'react';
+import firebase from './firebase';
 
 function App() {
-  return (
-    <div className="App">
+  const [spells, setSpells] = useState([]);
 
-    </div>
-  );
+  useEffect(() => {
+
+    const fetchData = async () => {
+      const db = firebase.firestore();
+      const data = await db.collection('spells').get();
+      setSpells(data.docs.map(doc => doc.data()));
+    }
+
+    fetchData()
+  });
+
+  if (spells.length > 0) {
+    return (
+      <ul>
+        {spells.map(spell => (
+          <li key={spell.title}>{spell.title}</li>
+        ))}
+      </ul>
+    );
+  } else {
+    return <>Loading...</>
+  }
 }
 
 export default App;
