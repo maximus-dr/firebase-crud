@@ -8,7 +8,7 @@ export default function SpellInput({ spell }) {
 
   const onUpdate = () => {
     const db = firebase.firestore();
-    db.collection('spells').doc(spell.id).set({...spell, title});
+    db.collection('spells').doc(spell.id).update({title});
   }
 
   return (
