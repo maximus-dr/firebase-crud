@@ -26,6 +26,11 @@ function App() {
     setNewSpellTitle('');
   }
 
+  const onDelete = (id) => {
+    const db = firebase.firestore();
+    db.collection('spells').doc(id).delete();
+  }
+
   if (spells.length > 0) {
     return (
       <ul>
@@ -36,6 +41,7 @@ function App() {
         {spells.map(spell => (
           <li key={spell.id}>
             <SpellInput spell={spell} />
+            <button onClick={() => onDelete(spell.id)}>Delete</button>
           </li>
         ))}
       </ul>
