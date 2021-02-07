@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import SpellInput from './components.js/SpellInput';
 import firebase from './firebase';
 
 function App() {
@@ -19,7 +20,9 @@ function App() {
     return (
       <ul>
         {spells.map(spell => (
-          <li key={spell.title}>{spell.title}</li>
+          <li key={spell.title}>
+            <SpellInput spell={spell} />
+          </li>
         ))}
       </ul>
     );
